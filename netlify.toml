@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+  # No build command — this is a static frontend, no bundler required.
+  # The functions/ dependencies (@supabase/supabase-js) are installed by
+  # Netlify automatically from package.json during deploy.
+
+[functions]
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>Bible Sequence — Can you put the story in order?</title>
+<meta name="description" content="Four Bible events. One correct sequence. Five rounds. Can you beat your friends?" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===================== START SCREEN ===================== -->
+  <section class="screen" id="screen-start" data-screen>
+    <div class="start-wrap">
+      <p class="eyebrow">TODAY'S CHALLENGE</p>
+      <h1 class="title-xl">BIBLE<br />SEQUENCE</h1>
+      <p class="subtitle">Can you put the story in order?</p>
+      <p class="lede">5 stories. 20 events. One score. Everyone gets the same challenge today.</p>
+      <button class="btn btn-primary btn-huge" id="btn-start">PLAY TODAY'S CHALLENGE</button>
+      <p class="fine-print" id="today-label">Today's sequence · new stories tomorrow</p>
+      <p class="fine-print" id="today-mix"></p>
+    </div>
+  </section>
+
+  <!-- ===================== ROUND SCREEN ===================== -->
+  <section class="screen" id="screen-round" data-screen hidden>
+    <header class="round-header">
+      <div class="round-header-top">
+        <span class="wordmark">BIBLE SEQUENCE</span>
+        <span class="round-count" id="round-count">ROUND 1 OF 5</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <p class="story-name" id="story-name">THE STORY OF —</p>
+    </header>
+
+    <p class="instruction">Put these events in chronological order.</p>
+
+    <ol class="card-list" id="card-list" aria-label="Drag or tap cards to reorder"></ol>
+
+    <p class="drag-hint" id="drag-hint">Drag a card, or tap two cards to swap them.</p>
+
+    <div class="story-context" id="story-context" hidden>
+      <p class="story-context-label">THE STORY</p>
+      <p class="story-context-text" id="story-context-text"></p>
+    </div>
+
+    <div class="round-footer">
+      <button class="btn btn-primary btn-huge" id="btn-lock-in">LOCK IN ANSWER</button>
+    </div>
+  </section>
+
+  <!-- ===================== RESULTS SCREEN ===================== -->
+  <section class="screen" id="screen-results" data-screen hidden>
+    <div class="results-wrap">
+      <p class="eyebrow" id="results-eyebrow">YOUR FINAL SCORE</p>
+      <p class="final-score" id="final-score">0/20</p>
+      <p class="final-percent" id="final-percent">0%</p>
+      <p class="final-message" id="final-message"></p>
+
+      <ul class="round-breakdown" id="round-breakdown"></ul>
+
+      <div class="results-actions">
+        <button class="btn btn-primary btn-huge" id="btn-share">SHARE MY RESULT</button>
+        <button class="btn btn-secondary btn-huge" id="btn-play-again">PLAY AGAIN</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
