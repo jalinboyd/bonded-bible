@@ -40,7 +40,7 @@ exports.handler = async function (event) {
     const { data: rounds, error: roundsError } = await supabase
       .from("daily_rounds")
       .select(
-        "round_number, story:stories(story_key, name), events:daily_round_events(display_position, event:events(id, event_text))"
+        "round_number, story:stories(story_key, name, description, category, subcategory, difficulty), events:daily_round_events(display_position, event:events(id, event_text))"
       )
       .eq("challenge_id", challenge.id)
       .order("round_number");
@@ -55,9 +55,15 @@ exports.handler = async function (event) {
         .map((r) => ({
           roundNumber: r.round_number,
           storyName: r.story.name,
-          // storyKey is included for the "already played" flow on the
-          // client and carries no spoiler information.
+          // storyKey/description/category/difficulty carry no spoiler
+          // information (none of them reveal event order), so they're
+          // safe to send up front — the frontend just chooses to keep
+          // displaying the description hidden until lock-in, for pacing.
           storyKey: r.story.story_key,
+          storyDescription: r.story.description,
+          category: r.story.category,
+          subcategory: r.story.subcategory,
+          difficulty: r.story.difficulty,
           cards: r.events
             .sort((a, b) => a.display_position - b.display_position)
             .map((e) => ({ eventId: e.event.id, text: e.event.event_text })),
